@@ -178,6 +178,7 @@ class QuickStream extends Payment
                 throw new Exception("Missing `currency` from payload: {$currency}.");
             }
 
+            // QuickStream doesn't like local IP's, so we'll reference Simple's static IP when testing in a dev environment:
             $payload = [
                 'transactionType' => 'PAYMENT',
                 'singleUseTokenId' => $quickstreamTokenId,
@@ -188,7 +189,7 @@ class QuickStream extends Payment
                     'submissionId' => (string) $submission->id,
                 ],
                 'eci' => 'INTERNET',
-                'ipAddress' => Craft::$app->getRequest()->getUserIP(),
+                'ipAddress' => (env('ENVIRONMENT') == 'dev')? '103.142.159.66' : Craft::$app->getRequest()->getUserIP(),
                 'threeDS2' => (bool) $this->getFieldSetting('threeDS2Enabled') ?? false,
             ];
 
