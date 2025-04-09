@@ -161,7 +161,7 @@ export class FormieQuickStream extends FormiePaymentProvider {
                     'background-color': 'white',
                 },
             },
-            showAcceptedCards: true,
+            showAcceptedCards: false,
             cardholderName: {
                 style: inputStyle,
                 label: 'Name on card',
